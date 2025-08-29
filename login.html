@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="firebase-config.js"></script>
+</head>
+<body>
+  <h2>Login</h2>
+
+  <form id="login-form">
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+  </form>
+
+  <button id="google-login">Login with Google</button>
+
+  <script>
+    // Email/Password login
+    document.getElementById('login-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then(userCredential => {
+          console.log(userCredential.user);
+          window.location.href = "map.html"; // redirect to your map
+        })
+        .catch(error => alert(error.message));
+    });
+
+    // Google login
+    document.getElementById('google-login').addEventListener('click', () => {
+      auth.signInWithPopup(provider)
+        .then(result => {
+          console.log(result.user);
+          window.location.href = "map.html"; // redirect to map
+        })
+        .catch(error => alert(error.message));
+    });
+  </script>
+</body>
+</html>
