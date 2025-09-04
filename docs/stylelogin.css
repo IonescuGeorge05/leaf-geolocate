@@ -1,0 +1,61 @@
+/* stylelogin.css */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+}
+
+.login-container {
+  background: rgba(255,255,255,0.05);
+  padding: 40px 30px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  width: 350px;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.login-container h2 { margin-bottom: 30px; font-size:28px; font-weight:600; }
+
+.login-container input[type="email"],
+.login-container input[type="password"] {
+  width:100%;
+  padding:12px 15px;
+  margin:12px 0;
+  border:none;
+  border-radius:10px;
+  background: rgba(255,255,255,0.1);
+  color:#fff;
+  font-size:16px;
+  transition: all 0.3s ease;
+}
+.login-container input[type="email"]:focus,
+.login-container input[type="password"]:focus { background: rgba(255,255,255,0.2); outline:none; }
+
+.login-container button {
+  width:100%;
+  padding:12px;
+  margin-top:15px;
+  border:none;
+  border-radius:10px;
+  background:#ff6b6b;
+  color:#fff;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  transition: all 0.3s ease;
+}
+.login-container button:hover { background:#ff4757; transform: translateY(-2px); }
+
+#google-login { background: #4285F4; margin-top:15px; }
+#google-login:hover { background: #357ae8; transform: translateY(-2px); }
+
+@keyframes fadeIn { 0% {opacity:0; transform:translateY(-20px);} 100% {opacity:1; transform:translateY(0);} }
+
+.login-container p { fo
