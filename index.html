@@ -1,39 +1,63 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Leaflet Geolocation Map</title>
 
   <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
 
   <!-- Your styles -->
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Login Modal -->
+  <div id="login-modal" class="modal">
+    <div class="modal-content">
+      <button id="close-login" class="close-btn">X</button>
+      <h2>Please log in</h2>
+      <p>You must be logged in to view station details.</p>
+      <button id="login-btn">Log In</button>
+    </div>
+  </div>
 
-  <!-- Firebase scripts -->
+  <!-- Map -->
+  <div id="map"></div>
+
+  <!-- Controls -->
+  <div id="controls">
+    <button id="recenter-btn">📍 Recenter</button>
+  </div>
+
+  <!-- Permanent login/logout -->
+  <button id="permanent-login-btn" class="permanent-login">Log In</button>
+
+  <!-- Legend -->
+  <div id="legend">
+    <div class="item"><div class="color-box" style="background:red"></div>Fuel Station</div>
+    <div class="item"><div class="color-box" style="background:green"></div>Charging Station</div>
+    <div class="item"><div class="color-box" style="background:blue"></div>Fuel + Charging</div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="firebase-config.js"></script>
-</head>
-<body>
-  <div id="map"></div>
 
-  <!-- Auth check -->
-  <script>
-    auth.onAuthStateChanged(user => {
-      if (!user) {
-        window.location.href = "login.html"; // redirect if not logged in
-      }
-    });
-  </script>
-
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-  <!-- Your app code -->
-  <script src="./app.js"></script>
+  <!-- App code -->
+  <script src="app.js"></script>
 </body>
 </html>
