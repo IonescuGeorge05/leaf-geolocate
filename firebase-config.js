@@ -1,12 +1,10 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyBH_tVg3MmMrGGKY-Y2dg68xKif_cDJ4Ls",
-  authDomain: "webapp-89129.firebaseapp.com",
-  projectId: "webapp-89129",
-  storageBucket: "webapp-89129.appspot.com",
-  messagingSenderId: "385801467002",
-  appId: "1:385801467002:web:xxxxxxxxxxxx"
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_ID",
+  appId: "YOUR_APP_ID"
 };
-
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
-const provider = new firebase.auth.GoogleAuthProvider();
