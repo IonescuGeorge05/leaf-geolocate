@@ -2,59 +2,162 @@
 html, body { height:100%; width:100%; font-family:"Inter",sans-serif; background:#f0f2f5; color:#333; }
 #map { position:absolute; top:0; bottom:0; width:100%; height:100vh; }
 
-.mapboxgl-popup-content { font-size:0.9rem; line-height:1.4; }
-.mapboxgl-popup-content a { color:#1976d2; font-weight:600; text-decoration:none; }
-.mapboxgl-popup-content a:hover { text-decoration:underline; color:#115293; }
+/* Hide Mapbox default controls completely */
+.mapboxgl-ctrl-top-right, .mapboxgl-ctrl-geolocate { display: none !important; }
 
-#controls {
-  position:absolute; top:20px; left:20px;
-  background:rgba(255,255,255,0.95); padding:12px 16px; border-radius:14px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.15); z-index:1000;
+/* Custom recenter button */
+/* Recenter button clean */
+#recenter-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1500;
+    background: #1e1e1e;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4); /* subtle shadow, no blue */
 }
-#controls button {
-  display:block; padding:8px 12px; font-size:0.9rem; font-weight:500; color:#fff;
-  background:#1976d2; border:none; border-radius:8px; cursor:pointer; transition:0.2s;
+#recenter-btn:hover {
+    background: #333;
+    transform: scale(1.05);
 }
-#controls button:hover { background:#115293; }
 
+/* Legend */
 #legend {
-  position:absolute; bottom:20px; left:20px;
-  background:rgba(255,255,255,0.95); padding:12px 16px; border-radius:14px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.15); font-size:0.85rem; z-index:1000;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(30,30,30,0.85);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
-#legend .item { display:flex; align-items:center; margin-bottom:6px; }
-#legend .color-box { width:16px; height:16px; border-radius:4px; margin-right:8px; border:1px solid #999; }
+#legend .item { display: flex; align-items: center; margin-bottom: 6px; }
+#legend .item:last-child { margin-bottom: 0; }
+#legend .color-box { width: 14px; height: 14px; border-radius: 3px; margin-right: 8px; }
 
+/* Modal */
 .modal {
-  display:none; position:fixed; z-index:2000; left:0; top:0; width:100%; height:100%;
-  backdrop-filter:blur(6px); background:rgba(0,0,0,0.4); justify-content:center; align-items:center;
+    display:none; position:fixed; z-index:2000; left:0; top:0; width:100%; height:100%;
+    backdrop-filter:blur(6px); background:rgba(0,0,0,0.4); justify-content:center; align-items:center;
 }
 .modal-content {
-  position: relative;
-  background:#fff;
-  padding:28px 36px;
-  border-radius:16px;
-  box-shadow:0 12px 28px rgba(0,0,0,0.3);
-  text-align:center;
+    position: relative;
+    background:#fff;
+    padding:28px 36px;
+    border-radius:16px;
+    box-shadow:0 12px 28px rgba(0,0,0,0.3);
+    text-align:center;
 }
 #login-btn {
-  padding:12px 24px; font-size:1rem; font-weight:600; color:#fff; background:#1976d2;
-  border:none; border-radius:10px; cursor:pointer; margin-top:16px; transition:0.2s;
+    padding:12px 24px; font-size:1rem; font-weight:600; color:#fff; background:#1976d2;
+    border:none; border-radius:10px; cursor:pointer; margin-top:16px; transition:0.2s;
 }
 #login-btn:hover { background:#115293; }
-
 .close-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width:28px; height:28px;
-  background:red; color:white; border:none; border-radius:50%;
-  font-weight:bold; cursor:pointer; display:flex; align-items:center; justify-content:center;
-  box-shadow:0 2px 6px rgba(0,0,0,0.3);
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width:28px; height:28px;
+    background:red; color:white; border:none; border-radius:50%;
+    font-weight:bold; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 2px 6px rgba(0,0,0,0.3);
 }
-
 .permanent-login {
-  position:absolute; bottom:20px; right:20px; z-index:1100;
-  padding:10px 16px; background:#1976d2; color:#fff; border:none; border-radius:10px; font-weight:600; cursor:pointer;
+    position:absolute; bottom:20px; right:20px; z-index:1100;
+    padding:10px 16px; background:#1976d2; color:#fff; border:none; border-radius:10px; font-weight:600; cursor:pointer;
 }
 .permanent-login:hover { background:#115293; }
+
+/* Custom popup */
+.station-popup {
+    background: #1e1e2f;
+    color: #fff;
+    padding: 16px 20px;
+    border-radius: 14px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    max-width: 220px;
+    text-align: center;
+    position: relative;
+}
+.station-popup h3 { font-size: 1.05rem; margin-bottom: 6px; color: #00ff95; }
+.station-popup .station-type { font-weight: 600; color: #87ceeb; }
+.station-popup .directions-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 12px;
+    background: #1976d2;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+.station-popup .directions-btn:hover { background: #115293; }
+.station-popup .popup-close {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: #ff4d4f;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    line-height: 1;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: 0.2s;
+}
+.station-popup .popup-close:hover { background: #c70000; }
+.mapboxgl-popup-content { background: transparent !important; border: none !important; box-shadow: none !important; padding: 0 !important; }
+.mapboxgl-popup-tip { display: none; }
+.mapboxgl-popup.popup-here .mapboxgl-popup-content { background: rgba(0,0,0,0.7) !important; color: white !important; border-radius: 8px; padding: 8px 12px !important; }
+.mapboxgl-popup.popup-here .mapboxgl-popup-content {
+    background: rgba(0,0,0,0.7) !important;
+    color: white !important;
+    border-radius: 8px;
+    padding: 8px 12px !important;
+    position: relative;
+}
+
+.mapboxgl-popup.popup-here .mapboxgl-popup-content {
+    background: rgba(0,0,0,0.7) !important;
+    color: white !important;
+    border-radius: 8px;
+    padding: 8px 12px !important;
+}
+
+/* Keep default style for close button, but smaller and dark */
+.mapboxgl-popup.popup-here .mapboxgl-popup-close-button {
+    top: -8px;  
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.mapboxgl-popup.popup-here .mapboxgl-popup-close-button:hover {
+    background: rgba(0,0,0,0.8);
+}
